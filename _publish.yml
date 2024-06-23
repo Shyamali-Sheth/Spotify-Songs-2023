@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: f205f871-54bf-4bea-b636-ba5f24d939d2
+      url: 'https://shyamali.quarto.pub/spotify-songs-2023'

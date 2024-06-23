@@ -1,0 +1,11 @@
+---
+title: "About"
+---
+
+My name is Shyamali Sheth and im a sophmore in highschool who is taking a Data Science Class for the first time. Here's my github [profile](https://github.com/Shyamali-Sheth). You can contact me at shyamali.sheth@gmali.com
+
+this project is on the most streamed songs on spotify. You can find my project [here](https://shyamali.quarto.pub/spotify-songs-2023/) .
+
+This project was created as a part of [Kane’s Data Science Bootcamp](https://bootcamp.davidkane.info/). 
+
+
