@@ -1,0 +1,50 @@
+---
+title: "Key Mode Frequency Heat map"
+author: "Shyamali Sheth"
+execute:
+  echo: false
+  message: false
+  warning: false
+
+---
+
+```{r}
+#|label: setup
+#|message: false
+
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+```
+
+```{r}
+#|label: loadingdata
+#|message: false
+
+data <- read_csv("data/spotify-2023.csv")
+data <- data %>%
+  rename(artist_name = `artist(s)_name`)
+
+track_counts <- data %>%
+  count(artist_name)
+```
+
+```{r}
+#|label: keyModeFreqHeatmap
+
+# Generate the frequency table
+key_mode_freq <- table(data$key, data$mode)
+
+# Convert the table to a data frame
+key_mode_freq_df <- as.data.frame(key_mode_freq)
+colnames(key_mode_freq_df) <- c("key", "mode", "frequency")
+
+ggplot(key_mode_freq_df, aes(x = key, y = mode, fill = frequency)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient(low = "skyblue", high = "blue") +
+  theme_minimal() +
+  labs(title = "Heatmap of Musical Key and Mode",
+       x = "Musical Key",
+       y = "Mode",
+       fill = "Frequency")
+```

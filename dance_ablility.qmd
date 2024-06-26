@@ -1,0 +1,51 @@
+---
+title: "Dance ability By Key"
+author: "Shyamali Sheth"
+execute:
+  echo: false
+  message: false
+  warning: false
+
+---
+
+```{r}
+#|label: setup
+#|message: false
+
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+```
+
+```{r}
+#|label: loadingdata
+#|message: false
+
+data <- read_csv("data/spotify-2023.csv")
+data <- data %>%
+  rename(artist_name = `artist(s)_name`)
+
+track_counts <- data %>%
+  count(artist_name)
+```
+
+```{r}
+#|label: danceabilityByKey
+
+data <- data %>%
+  rename(danceability = `danceability_%`)
+
+ggplot(data, aes(x = key, y = danceability, fill = key)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Danceability by Musical Key",
+       x = "Musical Key",
+       y = "Danceability (%)")
+
+# Find the most danceable song for each key
+most_danceable_songs <- data %>%
+  group_by(key) %>%
+  slice_max(danceability, with_ties = FALSE, n = 20) %>%
+  ungroup() %>% select(artist_name, track_name, key, danceability)
+
+```

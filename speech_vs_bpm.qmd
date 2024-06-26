@@ -1,0 +1,38 @@
+---
+title: "Speechiness V.S. BPM"
+author: "Shyamali Sheth"
+execute:
+  echo: false
+  warning: false
+---
+
+```{r}
+#|label: setup
+#|message: false
+
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+```
+
+```{r}
+#|label: loadingdata
+#|message: false
+
+data <- read_csv("data/spotify-2023.csv")
+data <- data %>%
+  rename(speechiness = `speechiness_%`)
+```
+
+```{r}
+#| label: SpeechinessvsBPM
+
+# Create a scatter plot for Speechiness vs. BPM
+ggplot(data, aes(x = bpm, y = speechiness)) +
+  geom_point(size = 4, color = "blue", alpha = 0.7) +
+  #geom_text(vjust = -1, size = 3) +
+  theme_minimal() +
+  labs(title = "Speechiness vs. BPM",
+       x = "BPM",
+       y = "Speechiness")
+```

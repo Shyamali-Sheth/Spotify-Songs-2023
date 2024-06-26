@@ -1,0 +1,40 @@
+---
+title: "Speechiness Histogram"
+author: "Shyamali Sheth"
+execute:
+  echo: false
+  message: false
+  warning: false
+
+---
+
+```{r}
+#|label: setup
+#|message: false
+
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+```
+
+```{r}
+#|label: loadingdata
+#|message: false
+
+data <- read_csv("data/spotify-2023.csv")
+data <- data %>%
+  rename(speechiness = `speechiness_%`)
+```
+
+```{r}
+#| label:  speechinessHistogram
+
+# Create a histogram with percentage labels
+ggplot(data, aes(x = speechiness)) +
+  geom_histogram(binwidth = 5, fill = "skyblue", color = "black") +
+  geom_text(stat = 'bin', aes(label = ..count..), binwidth = 5, vjust = -0.5) +
+  theme_minimal() +
+  labs(title = "Distribution of Speechiness",
+       x = "Speechiness",
+       y = "Count")
+```

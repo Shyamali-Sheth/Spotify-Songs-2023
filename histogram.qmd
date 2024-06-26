@@ -1,0 +1,45 @@
+---
+title: "Histogram"
+author: "Shyamali Sheth"
+execute:
+    echo: false
+    message: false
+    warning: false
+
+---
+
+```{r}
+#|label: setup
+#|message: false
+
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+```
+
+```{r}
+#|label: loadingdata
+#|message: false
+
+data <- read_csv("data/spotify-2023.csv")
+data <- data %>%
+  rename(artist_name = `artist(s)_name`)
+
+track_counts <- data %>%
+  count(artist_name)
+```
+
+```{r}
+#|label: histogram
+#|message: false
+
+data$bpm <- as.numeric(data$bpm)
+
+ggplot(data, aes(x = bpm)) +
+  geom_histogram(binwidth = 20, fill = "skyblue", color = "black") +
+  theme_minimal() +
+  labs(title = "Distribution of BPM",
+       x = "Beats per Minute",
+       y = "Count") +
+  scale_x_continuous(labels = scales::label_comma())
+```

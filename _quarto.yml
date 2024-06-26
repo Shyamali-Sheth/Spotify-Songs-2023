@@ -8,6 +8,16 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - href: histogram.qmd
+        text: Distribution of BPM
+      - href: key_mode.qmd
+        text: Key Mode Frequency Heatmap
+      - href: dance_ablility.qmd
+        text: Dance Ability By Key
+      - href: speech_histogram.qmd
+        text: Speechiness Histogram
+      - href: speech_vs_bpm.qmd
+        text: Speech V.S BPM
 
 format:
   html:

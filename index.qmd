@@ -3,6 +3,8 @@ title: "Spotify Songs 2023"
 execute: 
   echo: false
   message: false
+  warning: false
+
 
 ---
 
@@ -29,99 +31,5 @@ track_counts <- data %>%
   count(artist_name)
 ```
 
-```{r}
-#|label: histogram
-#|message: false
 
-data$bpm <- as.numeric(data$bpm)
-
-ggplot(data, aes(x = bpm)) +
-  geom_histogram(binwidth = 20, fill = "skyblue", color = "black") +
-  theme_minimal() +
-  labs(title = "Distribution of BPM",
-       x = "Beats per Minute",
-       y = "Count") +
-  scale_x_continuous(labels = scales::label_comma())
-```
-
-```{r}
-#|label: MajorVsMinor
-
-ggplot(data, aes(x = mode, fill = mode)) +
-  geom_bar() +
-  theme_minimal() +
-  labs(title = "Count of Major vs. Minor Keys",
-       x = "Mode",
-       y = "Count")
-```
-
-```{r}
-#|label: keyModeFreqHeatmap
-
-# Generate the frequency table
-key_mode_freq <- table(data$key, data$mode)
-
-# Convert the table to a data frame
-key_mode_freq_df <- as.data.frame(key_mode_freq)
-colnames(key_mode_freq_df) <- c("key", "mode", "frequency")
-
-ggplot(key_mode_freq_df, aes(x = key, y = mode, fill = frequency)) +
-  geom_tile(color = "white") +
-  scale_fill_gradient(low = "skyblue", high = "blue") +
-  theme_minimal() +
-  labs(title = "Heatmap of Musical Key and Mode",
-       x = "Musical Key",
-       y = "Mode",
-       fill = "Frequency")
-```
-
-```{r}
-#|label: danceabilityByKey
-
-data <- data %>%
-  rename(danceability = `danceability_%`)
-
-ggplot(data, aes(x = key, y = danceability, fill = key)) +
-  geom_boxplot() +
-  theme_minimal() +
-  labs(title = "Danceability by Musical Key",
-       x = "Musical Key",
-       y = "Danceability (%)")
-
-# Find the most danceable song for each key
-most_danceable_songs <- data %>%
-  group_by(key) %>%
-  slice_max(danceability, with_ties = FALSE, n = 20) %>%
-  ungroup() %>% select(artist_name, track_name, key, danceability)
-
-```
-
-```{r}
-#| label:  speechinessHistogram
-
-data <- data %>%
-  rename(speechiness = `speechiness_%`)
-
-# Create a histogram with percentage labels
-ggplot(data, aes(x = speechiness)) +
-  geom_histogram(binwidth = 5, fill = "skyblue", color = "black") +
-  geom_text(stat = 'bin', aes(label = ..count..), binwidth = 5, vjust = -0.5) +
-  theme_minimal() +
-  labs(title = "Distribution of Speechiness",
-       x = "Speechiness",
-       y = "Count")
-```
-
-```{r}
-#| label: SpeechinessvsBPM
-
-# Create a scatter plot for Speechiness vs. BPM
-ggplot(data, aes(x = bpm, y = speechiness)) +
-  geom_point(size = 4, color = "blue", alpha = 0.7) +
-  #geom_text(vjust = -1, size = 3) +
-  theme_minimal() +
-  labs(title = "Speechiness vs. BPM",
-       x = "BPM",
-       y = "Speechiness")
-```
 
