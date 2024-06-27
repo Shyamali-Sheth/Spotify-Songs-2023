@@ -33,8 +33,11 @@ data <- data %>%
 ggplot(data, aes(x = speechiness)) +
   geom_histogram(binwidth = 5, fill = "skyblue", color = "black") +
   geom_text(stat = 'bin', aes(label = ..count..), binwidth = 5, vjust = -0.5) +
-  theme_minimal() +
   labs(title = "Distribution of Speechiness",
-       x = "Speechiness",
-       y = "Count")
+       subtitle = "Majority of songs have a speechiness score below 10",
+       x = "Speechiness", y = "Count of Songs") +
+  theme(plot.title = element_text(size = 20, face = "bold"),
+        plot.subtitle = element_text(size = 15),
+        axis.title = element_text(size = 14),
+        axis.text = element_text(size = 12))
 ```

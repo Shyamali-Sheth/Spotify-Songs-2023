@@ -31,8 +31,12 @@ data <- data %>%
 ggplot(data, aes(x = bpm, y = speechiness)) +
   geom_point(size = 4, color = "blue", alpha = 0.7) +
   #geom_text(vjust = -1, size = 3) +
-  theme_minimal() +
   labs(title = "Speechiness vs. BPM",
+       subtitle = "Most Songs are less speechy and have 100 - 150 BPM",
        x = "BPM",
-       y = "Speechiness")
+       y = "Speechiness") +
+  theme(plot.title = element_text(size = 20, face = "bold"),
+        plot.subtitle = element_text(size = 15),
+        axis.title = element_text(size = 14),
+        axis.text = element_text(size = 12))
 ```

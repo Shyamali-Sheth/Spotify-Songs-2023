@@ -42,8 +42,12 @@ colnames(key_mode_freq_df) <- c("key", "mode", "frequency")
 ggplot(key_mode_freq_df, aes(x = key, y = mode, fill = frequency)) +
   geom_tile(color = "white") +
   scale_fill_gradient(low = "skyblue", high = "blue") +
-  theme_minimal() +
+  theme(plot.title = element_text(size = 20, face = "bold"),
+        plot.subtitle = element_text(size = 15),
+        axis.title = element_text(size = 14),
+        axis.text = element_text(size = 12)) +
   labs(title = "Heatmap of Musical Key and Mode",
+       subtitle = "Most Songs are in C#, D, G and G# Major",
        x = "Musical Key",
        y = "Mode",
        fill = "Frequency")

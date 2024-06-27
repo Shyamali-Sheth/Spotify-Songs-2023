@@ -4,11 +4,10 @@ execute:
   echo: false
   message: false
   warning: false
-
-
 ---
 
-These most streamed songs have made a big impact on people and how they hear music. These songs can range from Karma by Taylor Swift to Thunderstruck by AC\DC. these songs have a very wide genre range. Todays top streamed songs on spotify show how much people listen to certain music genres.
+As a singer-songwriter with a passion for music, I've always been fascinated by what makes a song resonate with listeners. Today, I'd like to explore this topic by analyzing data from the most streamed songs on Spotify in 2023 by examining various musical elements, such as the lyrics' speechiness, the tempo (BPM), and the key in which the songs are composed. We can uncover patterns and trends that contribute to a song's popularity.
+
 
 ```{r}
 #|label: setup

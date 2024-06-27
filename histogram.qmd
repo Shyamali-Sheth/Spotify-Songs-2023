@@ -8,6 +8,8 @@ execute:
 
 ---
 
+
+
 ```{r}
 #|label: setup
 #|message: false
@@ -37,9 +39,15 @@ data$bpm <- as.numeric(data$bpm)
 
 ggplot(data, aes(x = bpm)) +
   geom_histogram(binwidth = 20, fill = "skyblue", color = "black") +
-  theme_minimal() +
+  geom_text(stat = 'bin', aes(label = ..count..), binwidth = 20, vjust = -0.5) +
+#  theme_minimal() +
+  theme(plot.title = element_text(size = 20, face = "bold"),
+        plot.subtitle = element_text(size = 15),
+        axis.title = element_text(size = 14),
+        axis.text = element_text(size = 12)) +
   labs(title = "Distribution of BPM",
+       subtitle = "Most Songs have beats between 100 - 150",
        x = "Beats per Minute",
-       y = "Count") +
+       y = "Count of Somgs") +
   scale_x_continuous(labels = scales::label_comma())
 ```
